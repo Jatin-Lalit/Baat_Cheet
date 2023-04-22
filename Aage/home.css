@@ -4,8 +4,9 @@
 	box-sizing: border-box;
 }
 
+
 body {
-	background: #f6f5f7;
+	
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -13,6 +14,9 @@ body {
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
 	margin: -20px 0 50px;
+    background-image: url('https://imagetolink.com/ib/FTj69HHARn.png');
+			background-size: cover;
+			background-repeat: no-repeat;
 }
 
 h1 {
@@ -71,7 +75,7 @@ button.ghost {
 }
 
 form {
-	background-color: #FFFFFF;
+	background-color: rgba(0, 0, 0, 0.2); 
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -90,7 +94,7 @@ input {
 }
 
 .container {
-	background-color: #fff;
+	background-color: rgba(0, 0, 0, 0.2); 
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
@@ -123,6 +127,21 @@ input {
 	width: 50%;
 	opacity: 0;
 	z-index: 1;
+}
+.signup-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2; /* Set the z-index of the sign-up form to 2 */
+  /* Add any other styling you want for the sign-up form */
+}
+
+.signin-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; /* Set the z-index of the sign-in form to 1 */
+  /* Add any other styling you want for the sign-in form */
 }
 
 .container.right-panel-active .sign-up-container {

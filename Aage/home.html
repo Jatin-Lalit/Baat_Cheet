@@ -33,7 +33,7 @@
                 <span>Use your account</span>
                 <input type="email" name="email" placeholder="Email" id="email-log">
                 <input type="password" name="password" placeholder="Password" id="password-log">
-                <a href="#">Forgot Your Password</a>
+                <a   href="#"><h4 style="color:white;">Forgot Your Password</h4></a>
                 
 
                 <input type="submit" value="submit" id="button2">
@@ -64,141 +64,94 @@
 
 <script type="text/javascript">
 
-    // let storedData = JSON.parse(localStorage.getItem("details")) || []
+   
 
 
     const signUpButton = document.getElementById('signUp');
-    const signInButton = document.getElementById('signIn');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+const leftPanel = document.querySelector('.left-panel');
+const rightPanel = document.querySelector('.right-panel');
 
-    const container = document.getElementById('container');
+signUpButton.addEventListener('click', () => {
+  container.classList.add("right-panel-active");
+});
 
-    signUpButton.addEventListener('click', () => {
-        container.classList.add("right-panel-active");
-    });
-    signInButton.addEventListener('click', () => {
-        container.classList.remove("right-panel-active");
-    });
+signInButton.addEventListener('click', () => {
+  container.classList.remove("right-panel-active");
+});
 
 
-    let signupForm = document.getElementById("form1");
-    let nameInp = document.getElementById("name");
-    let emailInp = document.getElementById("email");
-    let passwordInp = document.getElementById("password")
+container.style.backgroundImage = "url('https://imagetolink.com/ib/FTj69HHARn.png')";
+container.style.backgroundRepeat = "no-repeat";
+container.style.backgroundSize = "cover";
+container.style.position = "relative";
+//////////////////////////////////////////////
+let baseurl="https://quaint-bonobo.cyclic.app/";
+//let signup_btn= document.querySelector("#signup form");
 
-    let database = JSON.parse(localStorage.getItem("userdetails"))
-    if (database === null) {
-        database = []
+ //signup_btn.addEventListener("submit", signupFun)
+async function signup(){
+try {
+    // event.preventDefault();n
+   
+    let email=document.getElementById("emai").value
+    let name=document.getElementById("nam").value
+    let pass=document.getElementById("pass").value;
+    let obj={
+      name,
+      email,
+      pass
     }
+    console.log(obj)
 
-    signupForm.addEventListener("submit", (e) => {
-        // e.preventDefault();
-
-        let userdata = {
-            user: nameInp.value,
-            email: emailInp.value,
-            password: passwordInp.value,
-        }
-
-        database.push(userdata);
-        localStorage.setItem("userdetails", JSON.stringify(database))
+    let signup_res= await fetch(`${baseurl}/signup`,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(obj)
     })
-
-
-
-
-
-
-
-
-
-
-
-
-    let loginForm = document.getElementById("form2");
-  let head = document.getElementById("head")
-  let emailInput = document.getElementById("email-log")
-  let passwordInput = document.getElementById("password-log")
-
-//   let lsData = JSON.parse(localStorage.getItem("userdetails"));
-//   if (lsData === null) {
-//     lsData = []
-//   }
-//   console.log(lsData)
-
-  loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    let storeData = JSON.parse(localStorage.getItem("data"))
-    if (storeData == null) {
-      storeData = []
+    if(signup_res.ok){
+        alert("Register Succecfully Now You  Can Login");
+       
     }
+} catch (error) {
+    console.log(error)
+    alert("Something going wrong")
+}}
 
 
-    let formData = {
-      email1: emailInput.value,
-      password1: passwordInput.value,
+async function login(){
+    try {
+        // event.preventDefault();
+        let email=document.getElementById("se").value
+        let password=document.getElementById("sp").value;
+        let obj={
+            email,
+            password
+        }
+        console.log(obj)
+    
+        let res= await fetch(`${baseurl}/login`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(obj)
+        })
+        if(res.ok){
+            let token= await res.json();
+           localStorage.setItem("token",token.token)
+            alert("Login Succecfully");
+            window.location.href="home.html"
+        }else{
+            alert("Wrong Credntials")
+        }
+    } catch (error) {
+        alert("Something going wrong")
     }
-    storeData.push(formData)
-    localStorage.setItem("data", JSON.stringify(storeData))
-
-    checkData(database, storeData)
-  })
-
-  function checkData(lsData, storeData) {
-
-    for (let i = 0; i < lsData.length; i++) {
-      console.log(lsData[i])
-      if (lsData[i].email == storeData[i].email1 && lsData[i].password == storeData[i].password1) {
-         alert("Signin Succesfull")
-         let logindone = "ok"
-         localStorage.setItem("logindone",JSON.stringify(logindone))
-         window.location.href="http://127.0.0.1:5500/index.html"
-      }
-      else{
-        alert("wrong credentials")
-      }
+        
     }
-     
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
